@@ -5,14 +5,16 @@ import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.*;
+import org.springframework.test.context.jdbc.Sql;
 
 import javax.transaction.Transactional;
+import java.sql.SQLException;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.springframework.data.domain.ExampleMatcher.GenericPropertyMatchers.contains;
+import static org.springframework.data.domain.ExampleMatcher.GenericPropertyMatchers.endsWith;
 
 @SpringBootTest //스프링 컨텍스트를 사용하겠다.
 class UserRepositoryTest {
@@ -20,14 +22,11 @@ class UserRepositoryTest {
     @Autowired
     private UserRepository userRepository;
 
-
     @Test
     void crud(){ //create, read, update, delete
         //테스트 데이터
 //        User user1 = new User("Kim", "kim@naver.com");
 //        User user2 = new User("Hong", "hong@naver.com");
-
-
 
         //----------------paging----------------
 //        Page<User> users = userRepository.findAll(PageRequest.of(0, 3));
@@ -72,8 +71,34 @@ class UserRepositoryTest {
 //        userRepository.deleteAllInBatch(userRepository.findAllById(Lists.newArrayList(1L, 3L))); //entity 확인 안하고 지움
 //        userRepository.deleteAllInBatch();
 
+
+        //----------------Example (QueryByExampleExecutor) 잘 안씀----------------
+//        ExampleMatcher matcher = ExampleMatcher.matching()
+//                .withIgnorePaths("name")
+//                .withMatcher("email", endsWith());
+//        Example<User> example = Example.of(new User("ma", "fastcampus.com"), matcher);
+
+//        Example<User> example = Example.of(new User("ma", "fastcampus.com"));
+
+//        User user = new User();
+//        user.setEmail("slow");
+//        ExampleMatcher matcher = ExampleMatcher.matching().withMatcher("email", contains());
+//        Example<User> example = Example.of(user, matcher);
+//
+//        userRepository.findAll(example).forEach(System.out::println);
+
+        //----------------update----------------
+        userRepository.save(new User("david", "david@gmail.com"));
+
+        User user = userRepository.findById(1L).orElseThrow(RuntimeException::new);
+        user.setEmail("martin-update@gmail.com");
+
+        userRepository.save(user);
+
+
         //----------------확인용----------------
 //        userRepository.findAll().forEach(System.out::println);
 //        System.out.println("page : " + users);
     }
+
 }
