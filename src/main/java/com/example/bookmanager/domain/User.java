@@ -26,5 +26,5 @@ public class User {
 
     private LocalDateTime createdAt;
 
-    private LocalDateTime updateAt;
+    private LocalDateTime updatedAt;
 }
