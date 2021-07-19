@@ -101,4 +101,22 @@ class UserRepositoryTest {
 //        System.out.println("page : " + users);
     }
 
+    @Test
+    public void select(){
+//        System.out.println(userRepository.findByName("dennis"));
+
+//        System.out.println("findByEmail : " + userRepository.findByEmail("martin@fastcampus.com"));
+//        System.out.println("getByEmail : " + userRepository.getByEmail("martin@fastcampus.com"));
+//        System.out.println("readByEmail : " + userRepository.readByEmail("martin@fastcampus.com"));
+//        System.out.println("queryByEmail : " + userRepository.queryByEmail("martin@fastcampus.com"));
+//        System.out.println("searchByEmail : " + userRepository.searchByEmail("martin@fastcampus.com"));
+//        System.out.println("streamByEmail : " + userRepository.streamByEmail("martin@fastcampus.com"));
+//        System.out.println("findUserByEmail : " + userRepository.findUserByEmail("martin@fastcampus.com"));
+//        System.out.println("findSomethingByEmail : " + userRepository.findSomethingByEmail("martin@fastcampus.com"));
+
+        System.out.println("findTop1ByName : " + userRepository.findTop1ByName("martin"));
+        System.out.println("findFirst1ByName : " + userRepository.findFirst1ByName("martin"));
+        System.out.println("findLast1ByName : " + userRepository.findLast1ByName("martin"));
+    }
+
 }
