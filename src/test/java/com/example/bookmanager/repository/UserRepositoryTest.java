@@ -13,8 +13,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.springframework.data.domain.ExampleMatcher.GenericPropertyMatchers.contains;
-import static org.springframework.data.domain.ExampleMatcher.GenericPropertyMatchers.endsWith;
+import static org.springframework.data.domain.ExampleMatcher.GenericPropertyMatchers.*;
 
 @SpringBootTest //스프링 컨텍스트를 사용하겠다.
 class UserRepositoryTest {
@@ -23,6 +22,7 @@ class UserRepositoryTest {
     private UserRepository userRepository;
 
     @Test
+    @Transactional
     void crud(){ //create, read, update, delete
         //테스트 데이터
 //        User user1 = new User("Kim", "kim@naver.com");
@@ -31,11 +31,11 @@ class UserRepositoryTest {
         //----------------paging----------------
 //        Page<User> users = userRepository.findAll(PageRequest.of(0, 3));
 //
-//        System.out.println("page : " + users);
-//        System.out.println("totalElements : " + users.getTotalElements());
-//        System.out.println("totalPages : " + users.getTotalPages());
-//        System.out.println("numberOfElements : " + users.getNumberOfElements()); //레코드 수 (zero-base 0에서부터 시작)
-//        System.out.println("sort : " + users.getSort());
+//        System.out.println("page : " + users); //객체
+//        System.out.println("totalElements : " + users.getTotalElements()); //총 레코드 수
+//        System.out.println("totalPages : " + users.getTotalPages()); //총 페이지 수
+//        System.out.println("numberOfElements : " + users.getNumberOfElements()); //현재 페이지의 레코드 수 (zero-base 0에서부터 시작)
+//        System.out.println("sort : " + users.getSort()); //소트 방식
 //        System.out.println("size : " + users.getSize()); //페이징 나누는 수
 //
 //        users.getContent().forEach(System.out::println);
@@ -49,33 +49,33 @@ class UserRepositoryTest {
 
 
         //----------------insert----------------
-//        userRepository.save(user1);
-//        userRepository.saveAll(Lists.newArrayList(user1, user2));
+//        userRepository.saveAll(Lists.newArrayList(new User("Kim", "kim@naver.com"), new User("Hong", "Hong@naver.com")));
 
-        //flush: 쿼리 변화x 디비 반영시점을 조정, 동작확인 어렵다.
+//        flush: 쿼리 변화x 디비 반영시점을 조정, 동작확인 어렵다.
 //        userRepository.save(new User("Kim", "kim@naver.com"));
 //        userRepository.flush();
 //        userRepository.saveAndFlush(new User("Kim", "kim@naver.com"));
 
 
         //----------------List select----------------
-//        List<User> users = userRepository.findAllById(Lists.newArrayList(1L, 3L, 5L));
+        //List<User> users = userRepository.findAllById(Lists.newArrayList(1L, 3L, 5L));
 //        List<User> users = userRepository.findAll(Sort.by(Sort.Direction.DESC, "name"));
+//        users.stream().forEach(System.out::println); //결과 출력 부분
 
 
-        //----------------List select----------------
+        //----------------delete ----------------
 //        userRepository.delete(userRepository.findById(1L).orElseThrow(RuntimeException::new));
 //        userRepository.deleteById(1L);
 //        userRepository.deleteAll(); //entity 확인하고 지움
-//        userRepository.deleteAll(userRepository.findAllById(Lists.newArrayList(1L, 3L))); //entity 확인 안하고 지움
-//        userRepository.deleteAllInBatch(userRepository.findAllById(Lists.newArrayList(1L, 3L))); //entity 확인 안하고 지움
+//        userRepository.deleteAll(userRepository.findAllById(Lists.newArrayList(1L, 3L)));
 //        userRepository.deleteAllInBatch();
+//        userRepository.deleteAllInBatch(userRepository.findAllById(Lists.newArrayList(1L, 3L))); //entity 확인 안하고 지움
 
 
         //----------------Example (QueryByExampleExecutor) 잘 안씀----------------
 //        ExampleMatcher matcher = ExampleMatcher.matching()
 //                .withIgnorePaths("name")
-//                .withMatcher("email", endsWith());
+//                .withMatcher("email", contains());
 //        Example<User> example = Example.of(new User("ma", "fastcampus.com"), matcher);
 
 //        Example<User> example = Example.of(new User("ma", "fastcampus.com"));
@@ -84,22 +84,24 @@ class UserRepositoryTest {
 //        user.setEmail("slow");
 //        ExampleMatcher matcher = ExampleMatcher.matching().withMatcher("email", contains());
 //        Example<User> example = Example.of(user, matcher);
-//
+////
 //        userRepository.findAll(example).forEach(System.out::println);
 
         //----------------update----------------
-        userRepository.save(new User("david", "david@gmail.com"));
-
-        User user = userRepository.findById(1L).orElseThrow(RuntimeException::new);
-        user.setEmail("martin-update@gmail.com");
-
-        userRepository.save(user);
+//        userRepository.save(new User("david", "david@gmail.com"));
+//
+//        User user = userRepository.findById(1L).orElseThrow(RuntimeException::new);
+//        user.setEmail("martin-update@gmail.com");
+//
+//        userRepository.save(user);
 
 
         //----------------확인용----------------
 //        userRepository.findAll().forEach(System.out::println);
 //        System.out.println("page : " + users);
     }
+
+
 
     @Test
     public void select(){
