@@ -12,6 +12,7 @@ import java.util.List;
 @Data
 @Builder
 @Entity
+@Table(name="user", indexes = {@Index(columnList = "name")}, uniqueConstraints = {@UniqueConstraint(columnNames = "email")})
 public class User {
     @Id
     @GeneratedValue
@@ -23,9 +24,16 @@ public class User {
     @NonNull
     private String email;
 
+    @Enumerated
+    private Gender gender;
+
+    @Column(updatable = false)
     private LocalDateTime createdAt;
 
     private LocalDateTime updatedAt;
+
+    @Transient
+    private String testData;
 
 //    @OneToMany(fetch = FetchType.EAGER)
 //    private List<Address> address;

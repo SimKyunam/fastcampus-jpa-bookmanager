@@ -1,5 +1,6 @@
 package com.example.bookmanager.repository;
 
+import com.example.bookmanager.domain.Gender;
 import com.example.bookmanager.domain.User;
 import org.assertj.core.util.Lists;
 import org.hibernate.criterion.Order;
@@ -174,5 +175,31 @@ class UserRepositoryTest {
             Sort.Order.asc("createAt"),
             Sort.Order.asc("updateAt")
         );
+    }
+
+    @Test
+    void insertAndUpdateTest(){
+        User user = new User();
+        user.setName("martin");
+        user.setEmail("martin2@gmail.com");
+
+        userRepository.save(user); //insert
+
+        User user2 = userRepository.findById(1L).orElseThrow(RuntimeException::new);
+        user2.setName("KIM");
+
+        userRepository.save(user2); //update
+    }
+
+    @Test
+    void enumTest(){
+        User user = userRepository.findById(1L).orElseThrow(RuntimeException::new);
+        user.setGender(Gender.MALE);
+
+        userRepository.save(user);
+
+        userRepository.findAll().forEach(System.out::println);
+
+        System.out.println(userRepository.findRowRecord().get("gender"));
     }
 }
