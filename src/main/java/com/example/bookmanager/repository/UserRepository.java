@@ -1,6 +1,9 @@
 package com.example.bookmanager.repository;
 
 import com.example.bookmanager.domain.User;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -14,8 +17,8 @@ public interface UserRepository extends JpaRepository<User, Long>{
     Set<User> findByName(String name);
 
     Set<User> findUserByNameIs(String names);
+
     Set<User> findUserByName(String names);
-    Set<User> findUserByEquals(String names);
 
     User findByEmail(String email);
 
@@ -37,7 +40,7 @@ public interface UserRepository extends JpaRepository<User, Long>{
 
     List<User> findTop1ByName(String name);
 
-    User findLast1ByName(String name);
+    List<User> findLast1ByName(String name);
 
     List<User> findByEmailAndName(String email, String name);
 
@@ -73,5 +76,13 @@ public interface UserRepository extends JpaRepository<User, Long>{
 
     List<User> findByNameLike(String names);
 
+    List<User> findTopByNameOrderByIdDesc(String names);
 
+    List<User> findTopByNameOrderById(String names);
+
+    List<User> findFirstByNameOrderByIdDescEmailAsc(String names);
+
+    List<User> findFirstByName(String name, Sort sort);
+
+    Page<User> findByName(String name, Pageable pageable);
 }
