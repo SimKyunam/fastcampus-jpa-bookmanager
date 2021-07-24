@@ -20,7 +20,7 @@ import java.time.LocalDateTime;
 @Data
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
-public class UserHistory extends BaseEntity implements Auditable {
+public class UserHistory extends BaseEntity{
     @Id
     @GeneratedValue
     private Long id;
@@ -30,10 +30,4 @@ public class UserHistory extends BaseEntity implements Auditable {
     private String name;
 
     private String email;
-
-//    @CreatedDate
-//    private LocalDateTime createdAt;
-//
-//    @LastModifiedDate
-//    private LocalDateTime updatedAt;
 }

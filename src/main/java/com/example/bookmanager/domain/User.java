@@ -20,7 +20,7 @@ import java.time.LocalDateTime;
 @Entity
 @EntityListeners(value = {UserEntityListener.class})
 //@Table(name="user", indexes = {@Index(columnList = "name")}, uniqueConstraints = {@UniqueConstraint(columnNames = "email")})
-public class User extends BaseEntity implements Auditable {
+public class User extends BaseEntity{
     @Id
     @GeneratedValue
     private Long id;
@@ -34,27 +34,6 @@ public class User extends BaseEntity implements Auditable {
     @Enumerated
     private Gender gender;
 
-//    @Column(updatable = false)
-//    @CreatedDate
-//    private LocalDateTime createdAt;
-//
-//    @LastModifiedDate
-//    private LocalDateTime updatedAt;
-
     @Transient
     private String testData;
-
-//    @OneToMany(fetch = FetchType.EAGER)
-//    private List<Address> address;
-
-//    @PrePersist
-//    public void prePersist(){
-//        this.createdAt = LocalDateTime.now();
-//        this.updatedAt = LocalDateTime.now();
-//    }
-//
-//    @PreUpdate
-//    public void preUpdate(){
-//        this.updatedAt = LocalDateTime.now();
-//    }
 }
