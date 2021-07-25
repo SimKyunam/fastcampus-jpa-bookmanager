@@ -9,6 +9,8 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -19,7 +21,6 @@ import java.time.LocalDateTime;
 @Builder
 @Entity
 @EntityListeners(value = {UserEntityListener.class})
-//@Table(name="user", indexes = {@Index(columnList = "name")}, uniqueConstraints = {@UniqueConstraint(columnNames = "email")})
 public class User extends BaseEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,6 +35,7 @@ public class User extends BaseEntity{
     @Enumerated
     private Gender gender;
 
-    @Transient
-    private String testData;
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinColumn(name = "userId", insertable = false, updatable = false)
+    private List<UserHistory> userHistories = new ArrayList<>();
 }

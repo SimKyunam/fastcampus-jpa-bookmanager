@@ -2,6 +2,7 @@ package com.example.bookmanager.repository;
 
 import com.example.bookmanager.domain.Gender;
 import com.example.bookmanager.domain.User;
+import com.example.bookmanager.domain.UserHistory;
 import org.assertj.core.util.Lists;
 import org.hibernate.criterion.Order;
 import org.junit.jupiter.api.Test;
@@ -107,8 +108,6 @@ class UserRepositoryTest {
 //        userRepository.findAll().forEach(System.out::println);
 //        System.out.println("page : " + users);
     }
-
-
 
     @Test
     public void select(){
@@ -260,5 +259,29 @@ class UserRepositoryTest {
         userRepository.save(user);
 
         userHistoryRepository.findAll().forEach(System.out::println);
+    }
+
+    @Test
+    void userRelationTest(){
+        User user = new User();
+        user.setName("Hong");
+        user.setEmail("hong@gmail.com");
+        user.setGender(Gender.MALE);
+        userRepository.save(user);
+
+        user.setName("Kim");
+        userRepository.save(user);
+
+        user.setEmail("kim@gmail.com");
+        userRepository.save(user);
+
+//        userHistoryRepository.findAll().forEach(System.out::println);
+
+//        List<UserHistory> result = userHistoryRepository.findByUserId(
+//                userRepository.findByEmail("kim@gmail.com").getId());
+
+        List<UserHistory> result = userRepository.findByEmail("kim@gmail.com").getUserHistories();
+
+        result.forEach(System.out::println);
     }
 }
