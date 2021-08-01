@@ -21,6 +21,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.data.domain.ExampleMatcher.GenericPropertyMatchers.*;
 
 @SpringBootTest //스프링 컨텍스트를 사용하겠다.
+@Transactional
 class UserRepositoryTest {
 
     @Autowired
