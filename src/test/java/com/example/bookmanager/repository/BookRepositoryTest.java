@@ -47,6 +47,28 @@ class BookRepositoryTest {
         System.out.println("Publisher : " + user.getReviews().get(0).getBook().getPublisher());
     }
 
+    @Test
+    void bookCascadeTest(){
+        Book book = new Book();
+        book.setName("JPA 책");
+
+        Publisher publisher = new Publisher();
+        publisher.setName("테스트 출판사");
+
+        book.setPublisher(publisher); //영속화 하지 않은 상태에서 setter는 연관관계 맺기가 힘듬
+        bookRepository.save(book);
+
+        System.out.println("books : " + bookRepository.findAll());
+        System.out.println("publishers : " + publisherRepository.findAll());
+
+        Book book1 = bookRepository.findById(1L).get();
+        book1.getPublisher().setName("변경된 출판사");
+
+        bookRepository.save(book1);
+
+        System.out.println("publishers : " + publisherRepository.findAll());
+    }
+
     private void givenBookAndReview(){
         givenReview(givenUser(), givenBook(givenPublisher()));
     }
