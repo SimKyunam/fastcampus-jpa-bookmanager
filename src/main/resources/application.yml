@@ -25,3 +25,8 @@ logging:
   level:
 #    org.hibernate.SQL: DEBUG
     org.hibernate.type: trace
+
+server:
+  servlet:
+    encoding:
+      force-response: true
