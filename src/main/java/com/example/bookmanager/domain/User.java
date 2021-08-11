@@ -18,7 +18,6 @@ import java.util.List;
 @Data
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
-@Builder
 @Entity
 @EntityListeners(value = {UserEntityListener.class})
 public class User extends BaseEntity{
