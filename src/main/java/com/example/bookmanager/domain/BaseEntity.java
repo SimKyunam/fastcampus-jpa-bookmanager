@@ -15,10 +15,11 @@ import java.time.LocalDateTime;
 @MappedSuperclass
 @EntityListeners(value = AuditingEntityListener.class)
 public class BaseEntity implements Auditable {
-    @Column(updatable = false)
     @CreatedDate
+    @Column(columnDefinition = "datetime(6) default now(6)", nullable = false, updatable = false)
     private LocalDateTime createdAt;
 
     @LastModifiedDate
+    @Column(columnDefinition = "datetime(6) default now(6)", nullable = false)
     private LocalDateTime updatedAt;
 }

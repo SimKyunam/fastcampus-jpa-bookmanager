@@ -10,6 +10,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.transaction.Transactional;
 
+import java.time.LocalDateTime;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
@@ -98,6 +100,18 @@ class BookRepositoryTest {
 
 //        bookRepository.findAllByDeletedFalse().forEach(System.out::println);
         bookRepository.findByCategoryIsNullAndDeletedFalse().forEach(System.out::println);
+    }
+
+    @Test
+    void queryTest(){
+        bookRepository.findAll().forEach(System.out::println);
+
+        System.out.println("findByCategoryIsNullAndNameEqualsAndCreatedAtGreaterThanEqualAndUpdatedAtGreaterThanEqual : "
+        + bookRepository.findByCategoryIsNullAndNameEqualsAndCreatedAtGreaterThanEqualAndUpdatedAtGreaterThanEqual(
+            "JPA 초격자 패키지",
+            LocalDateTime.now().minusDays(1L),
+            LocalDateTime.now().minusDays(1L)
+        ));
     }
 
     private void givenBookAndReview(){
