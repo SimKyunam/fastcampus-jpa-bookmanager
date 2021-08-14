@@ -21,10 +21,10 @@ spring:
     init:
       mode: always
 
-logging:
-  level:
+#logging:
+#  level:
 #    org.hibernate.SQL: DEBUG
-    org.hibernate.type: trace
+#    org.hibernate.type: trace
 
 server:
   servlet:
