@@ -16,3 +16,14 @@ insert into book(`id`, `name`, `publisher_id`, `deleted`, `status`) values(1, 'J
 insert into book(`id`, `name`, `publisher_id`, `deleted`, `status`) values(2, 'Spring', 1, false, 200);
 
 insert into book(`id`, `name`, `publisher_id`, `deleted`, `status`) values(3, 'Spring Security', 1, true, 100);
+
+
+insert into review(`id`, `title`, `content`, `score`, `user_id`, `book_id`) values(1, '내 인생을 바꾼 책', '좋았어요', 5.0, 1, 1);
+
+insert into review(`id`, `title`, `content`, `score`, `user_id`, `book_id`) values(2, '너무 진도가 빨라요', '조금 별로였어요', 3.0, 2, 2);
+
+insert into comment(`id`, `comment`, `review_id`) values(1, '좋았어요', 1);
+
+insert into comment(`id`, `comment`, `review_id`) values(2, '별로 였습니다.', 1);
+
+insert into comment(`id`, `comment`, `review_id`) values(3, '그냥 그랬습니다.', 2);
