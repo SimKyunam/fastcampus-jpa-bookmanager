@@ -318,11 +318,16 @@ class UserRepositoryTest {
 
         userRepository.save(user2);
 
-//        entityManager.clear();
+        entityManager.clear();
 
         userRepository.findAll().forEach(System.out::println);
 //        userHistoryRepository.findAll().forEach(System.out::println);
 
         userRepository.findAllRowRecords().forEach(a -> System.out.println(a.values()));
+
+        assertAll(
+            () -> assertNull(userRepository.findById(7L).get().getHomeAddress()),
+            () -> assertEquals(userRepository.findById(8L).get().getHomeAddress().getClass(), Address.class)
+        );
     }
 }
