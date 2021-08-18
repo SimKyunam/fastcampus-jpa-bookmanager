@@ -21,8 +21,9 @@ spring:
     init:
       mode: always
 
-#logging:
-#  level:
+logging:
+  level:
+    root: trace
 #    org.hibernate.SQL: DEBUG
 #    org.hibernate.type: trace
 
